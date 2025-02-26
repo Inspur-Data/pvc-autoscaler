@@ -1,0 +1,7 @@
+domain: icks.inspur.com
+repo: cronpva-operator
+resources:
+- group: ipaas
+  kind: CronPersistentVolumeAutoscaler
+  version: v1
+version: "2"

@@ -1,0 +1,12 @@
+apiVersion: ipaas.icks.inspur.com/v1
+kind: CronPersistentVolumeAutoscaler
+metadata:
+  name: my-cronhpa
+  namespace: default
+spec:
+  enable: true
+  targetRef:
+    pvaName: my-pva
+  cronTabs:
+    - name: "cron-pva"
+      schedule: "30 */1 * * * *"

@@ -1,0 +1,106 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.2.4
+  creationTimestamp: null
+  name: cronpersistentvolumeautoscalers.ipaas.icks.inspur.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.phase
+    name: Status
+    type: string
+  group: ipaas.icks.inspur.com
+  names:
+    kind: CronPersistentVolumeAutoscaler
+    listKind: CronPersistentVolumeAutoscalerList
+    plural: cronpersistentvolumeautoscalers
+    shortNames:
+    - cp
+    singular: cronpersistentvolumeautoscaler
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: CronPersistentVolumeAutoscalerSpec defines the desired state
+            of CronPersistentVolumeAutoscaler
+          properties:
+            cronTabs:
+              items:
+                properties:
+                  name:
+                    type: string
+                  schedule:
+                    type: string
+                required:
+                - name
+                - schedule
+                type: object
+              type: array
+            enable:
+              type: boolean
+            targetRef:
+              description: Foo is an example field of CronPersistentVolumeAutoscaler.
+                Edit CronPersistentVolumeAutoscaler_types.go to remove/update
+              properties:
+                pvaName:
+                  type: string
+              required:
+              - pvaName
+              type: object
+          type: object
+        status:
+          description: CronPersistentVolumeAutoscalerStatus defines the observed state
+            of CronPersistentVolumeAutoscaler
+          properties:
+            conditions:
+              description: 'INSERT ADDITIONAL STATUS FIELD - define observed state
+                of cluster Important: Run "make" to regenerate code after modifying
+                this file'
+              items:
+                properties:
+                  lastTransitionTime:
+                    format: date-time
+                    type: string
+                  message:
+                    type: string
+                  'reason ':
+                    type: string
+                  status:
+                    type: string
+                  type:
+                    type: string
+                type: object
+              type: array
+            phase:
+              type: string
+          type: object
+      type: object
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
